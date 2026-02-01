@@ -1,0 +1,210 @@
+Perfect — let’s plug **GitHub** into that Git hands-on and make it *real*.
+This is a **Linux terminal → GitHub → push & pull** mini-lab. 🚀
+
+---
+
+## 1️⃣ Create a GitHub Repository (Web)
+
+1. Go to **github.com**
+2. Click **New repository**
+3. Repo name: `git-demo`
+4. ✅ Public (or Private)
+5. ❌ **Do NOT** check “Initialize with README”
+6. Click **Create repository**
+
+Keep that page open — you’ll need the repo URL.
+
+---
+
+## 2️⃣ Generate SSH Key (Recommended)
+
+Check if you already have one:
+
+```bash
+ls ~/.ssh
+```
+
+If not:
+
+```bash
+ssh-keygen -t ed25519 -C "you@example.com"
+```
+
+Press **Enter** for defaults.
+
+Start SSH agent:
+
+```bash
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+
+Copy public key:
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
+
+👉 GitHub → **Settings → SSH and GPG keys → New SSH key**
+Paste it → Save.
+
+Test connection:
+
+```bash
+ssh -T git@github.com
+```
+
+You should see:
+
+> Hi username! You've successfully authenticated...
+
+---
+
+## 3️⃣ Connect Local Repo to GitHub
+
+Inside your project folder:
+
+```bash
+cd git-demo
+```
+
+Add GitHub as remote:
+
+```bash
+git remote add origin git@github.com:USERNAME/git-demo.git
+```
+
+Verify:
+
+```bash
+git remote -v
+```
+
+---
+
+## 4️⃣ Push Code to GitHub
+
+If branch is `master`, rename to `main` (GitHub standard):
+
+```bash
+git branch -M main
+```
+
+Push:
+
+```bash
+git push -u origin main
+```
+
+🎉 Refresh GitHub → your files are there.
+
+---
+
+## 5️⃣ Clone a Repo (New Machine / Folder)
+
+```bash
+cd ~
+git clone git@github.com:USERNAME/git-demo.git
+cd git-demo
+```
+
+---
+
+## 6️⃣ Typical Daily Workflow
+
+### Make changes
+
+```bash
+nano hello.txt
+```
+
+### Check status
+
+```bash
+git status
+```
+
+### Stage & commit
+
+```bash
+git add .
+git commit -m "Update message"
+```
+
+### Push to GitHub
+
+```bash
+git push
+```
+
+---
+
+## 7️⃣ Pull Changes from GitHub
+
+If someone else (or another machine) updated the repo:
+
+```bash
+git pull
+```
+
+---
+
+## 8️⃣ Branch + Push to GitHub
+
+```bash
+git checkout -b feature-login
+echo "Login feature" > login.txt
+git add .
+git commit -m "Add login feature"
+git push -u origin feature-login
+```
+
+Now GitHub will show:
+
+> **Compare & Pull Request**
+
+---
+
+## 9️⃣ Fix Common Errors
+
+### ❌ Permission denied (publickey)
+
+➡ SSH key not added or wrong repo URL
+
+Check:
+
+```bash
+git remote -v
+```
+
+### ❌ Rejected – fetch first
+
+```bash
+git pull --rebase
+git push
+```
+
+---
+
+## 🔥 Cheat Commands (Memorize These)
+
+```bash
+git clone
+git status
+git add .
+git commit -m "msg"
+git push
+git pull
+git checkout -b branch
+```
+
+---
+
+## Want Me To Show You…
+
+* 🔥 **Pull Requests step-by-step**
+* 💥 **Merge conflicts (and how to fix them)**
+* 🧠 **Git vs GitHub explained simply**
+* 🧪 **Real dev workflow like teams use**
+
+Say the word 👇
